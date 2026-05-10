@@ -1,0 +1,235 @@
+ 
+Experiment 3: To study and implement basic HTML tags for creating a simple web page structure.
+ 
+Introduction
+HTML (HyperText Markup Language) is used to design web pages. It uses tags to structure content like text, images, and links.
+ 
+Basic HTML Structure
+<!DOCTYPE html>
+<html>
+<head>
+<title>My First Page</title>
+</head>
+<body>
+<h1>Hello World</h1>
+<p>This is my first web page.</p>
+</body>
+</html>
+ 
+Basic HTML Tags with Syntax & Use Case
+1. Heading Tags
+Syntax:
+<h1>Heading</h1>
+Use: Defines headings (h1 to h6, largest to smallest)
+ 
+2. Paragraph Tag
+Syntax:
+<p>This is a paragraph</p>
+Use: Adds text content in paragraph form
+ 
+3. Line Break Tag
+Syntax:
+<br>
+Use: Breaks line without starting new paragraph
+ 
+4. Anchor Tag (Link)
+Syntax:
+<a href="https://example.com">Visit Site</a>
+Use: Creates hyperlinks
+ 
+5. Image Tag
+Syntax:
+<imgsrc="image.jpg" alt="Image">
+Use: Displays images on webpage
+ 
+6. List Tags
+Unordered List:
+<ul>
+<li>Item 1</li>
+<li>Item 2</li>
+</ul>
+Ordered List:
+<ol>
+<li>Item 1</li>
+<li>Item 2</li>
+</ol>
+Use: Displays lists (bulleted or numbered)
+ 
+7. Table Tag
+Syntax:
+<table border="1">
+<tr>
+<th>Name</th>
+<th>Age</th>
+</tr>
+<tr>
+<td>Bunny</td>
+<td>20</td>
+</tr>
+</table>
+Use: Creates tables
+ 
+8. Form Tag
+Syntax:
+<form>
+ Name: <input type="text"><br>
+<input type="submit">
+</form>
+Use: Takes user input
+ 
+9. Bold & Italic
+<b>Bold Text</b>
+<i>Italic Text</i>
+Use: Text formatting
+ 
+10. Div Tag
+<div>
+ Content here
+</div>
+Use: Groups elements for styling/layout
+ 
+Conclusion
+Basic HTML tags help in structuring web pages effectively. Understanding these tags is essential for web development.
+Experiment 5:Create a weather app using Fetch API or Axios that fetches real-time weather data based on user input.
+ 
+ 
+index.html
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Weather App</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg,#4facfe,#00f2fe);
+    display:flex;
+    height:100vh;
+    margin:0;
+}
+ 
+.map-container{
+    flex:1;
+    height:100%;
+}
+ 
+.container{
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    text-align:center;
+    width:350px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+ 
+h1{
+    margin-bottom:20px;
+}
+ 
+input{
+    padding:10px;
+    width:70%;
+    border-radius:8px;
+    border:1px solid #ccc;
+}
+ 
+button{
+    padding:10px 15px;
+    border:none;
+    background:#4facfe;
+    color:white;
+    border-radius:8px;
+    cursor:pointer;
+}
+ 
+button:hover{
+    background:#2196f3;
+}
+ 
+.weather-icon{
+    width:80px;
+}
+ 
+#result{
+    margin-top:20px;
+}
+</style>
+ 
+</head>
+<body>
+ 
+  <div class="map-container" id="map"></div>
+ 
+  <div class="container">
+    <h1>🌤 Weather App</h1>
+    <input type="text" id="city" placeholder="Enter city">
+    <button onclick="getWeather()">Search</button>
+    <div id="result"></div>
+  </div>
+ 
+<script>
+ 
+let map = L.map('map').setView([20, 0], 2);
+ 
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors'
+}).addTo(map);
+ 
+let marker;
+ 
+async function getWeather(){
+    const city = document.getElementById("city").value;
+    constapiKey = "8d159f3058df8a56f0337338593dd395";
+ 
+    if(city===""){
+        document.getElementById("result").innerHTML="Enter a city name";
+        return;
+    }
+ 
+    const url=`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+ 
+    try{
+        const response = await fetch(url);
+        const data = await response.json();
+        if(data.cod!=200){
+            throw new Error(data.message);
+        }
+ 
+        const icon = data.weather[0].icon;
+ 
+        document.getElementById("result").innerHTML = `
+            <h2>${data.name}, ${data.sys.country}</h2>
+            <img class="weather-icon" src="https://openweathermap.org/img/wn/${icon}@2x.png">
+            <p><b>${data.main.temp} °C</b></p>
+            <p>${data.weather[0].description}</p>
+            <p>Humidity: ${data.main.humidity}%</p>
+            <p>Wind: ${data.wind.speed} m/s</p>
+        `;
+ 
+        const lat = data.coord.lat;
+        const lon = data.coord.lon;
+        map.setView([lat, lon], 10);
+ 
+        if(marker){
+            marker.setLatLng([lat, lon]);
+        } else {
+            marker = L.marker([lat, lon]).addTo(map);
+        }
+ 
+    } catch(error){
+        document.getElementById("result").innerHTML= `<p style="color:red">${error.message}</p>`;
+    }
+}
+</script>
+</body>
+</html>
+ 
+ 
+ 
+
+ 
+ 
+ 
