@@ -1,0 +1,136 @@
+Experiment 7
+Aim:
+To develop a single-page application (SPA) using React.js that allows users to view, add, update, and delete notes.
+ 
+Introduction:
+React.js is a popular JavaScript library used for building user interfaces, especially single-page applications. A SPA loads a single HTML page and dynamically updates content without reloading the page. In this experiment, we create a Notes App that performs CRUD (Create, Read, Update, Delete) operations using React components and state management.
+ 
+Requirements:
+• Node.js and npm installed
+• React.js (using Create React App)
+• Code Editor (VS Code)
+ 
+Algorithm / Steps:
+1. Install Node.js and set up React environment.
+2. Create a new React app using:
+npx create-react-app notes-app
+3. Navigate to project folder:
+cd notes-app
+4. Create components:
+o NoteForm (for adding/updating notes)
+o NoteList (for displaying notes)
+o NoteItem (for each note)
+5. Use React state (useState) to manage notes.
+6. Implement functions:
+o Add note
+o Update note
+o Delete note
+7. Render all components in App.js.
+8. Run the application using:
+npm start
+ 
+Program Code:
+App.js
+import React, { useState } from "react";
+import "./App.css";
+
+function App() {
+const [notes, setNotes] = useState([]);
+const [text, setText] = useState("");
+const [editIndex, setEditIndex] = useState(null);
+
+constaddNote = () => {
+   if (text.trim() === "") return;
+
+   if (editIndex !== null) {
+constupdatedNotes = [...notes];
+updatedNotes[editIndex] = text;
+setNotes(updatedNotes);
+setEditIndex(null);
+   } else {
+setNotes([...notes, text]);
+   }
+setText("");
+ };
+
+constdeleteNote = (index) => {
+constnewNotes = notes.filter((_, i) =>i !== index);
+setNotes(newNotes);
+ };
+
+consteditNote = (index) => {
+setText(notes[index]);
+setEditIndex(index);
+ };
+
+ return (
+<div className="container">
+<h1>Notes App</h1>
+
+<input
+       type="text"
+       placeholder="Enter note..."
+       value={text}
+onChange={(e) =>setText(e.target.value)}
+     />
+<button onClick={addNote}>
+       {editIndex !== null ? "Update" : "Add"}
+</button>
+
+<ul>
+       {notes.map((note, index) => (
+<li key={index}>
+           {note}
+<button onClick={() =>editNote(index)}>Edit</button>
+<button onClick={() =>deleteNote(index)}>Delete</button>
+</li>
+       ))}
+</ul>
+</div>
+ );
+}
+
+export default App;
+ 
+App.css
+.container {
+ text-align: center;
+ margin-top: 50px;
+ font-family: Arial;
+}
+
+input {
+ padding: 10px;
+ width: 250px;
+ margin-right: 10px;
+}
+
+button {
+ padding: 8px 12px;
+ margin: 5px;
+ cursor: pointer;
+}
+
+ul {
+ list-style: none;
+ padding: 0;
+}
+
+li {
+ margin: 10px;
+ padding: 10px;
+ background: #f0f0f0;
+ display: inline-block;
+}
+ 
+Output:
+A functional Notes Application where users can:
+• Add new notes
+• Edit existing notes
+• Delete notes
+• View all notes dynamically without page reload
+ 
+Conclusion:
+This experiment demonstrates how React.js can be used to build dynamic single-page applications. By using components and state management, CRUD operations were implemented efficiently, improving user experience without page refresh.
+ 
+
