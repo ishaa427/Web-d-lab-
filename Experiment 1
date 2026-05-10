@@ -1,0 +1,72 @@
+Lab1
+Experiment1:SetupaGitHubrepositoryforaproject,createbranches,mergechanges,and use GitHub Pages for hosting a simple static site.
+CreatingaccountonGitHub:
+1. Openyourbrowserandgotohttps://github.com
+2. ClickonSign Up.
+3. EnteryouremailaddressandclickContinue.
+4. Createastrongpassword.
+5. Chooseauniqueusername.
+6. Verifyyouraccount(email/OTP verification).
+7. CompletethesetupandlogintoyourGitHubaccount.
+ 
+StepstoCreateaNewRepository
+1. Afterloggingin,clickonthe"+"(plusicon)inthetoprightcorner.
+2. SelectNewrepository.
+3. EnteraRepositoryName(e.g.,portfolio-website).
+4. AddashortDescription(optional).
+5. Chooserepositoryvisibility:
+o Public(visibletoeveryone)
+ 
+Isha Gupta
+J240213055
+B.TechIT(G2)
+ 
+JCS408– LabFile
+ 
+o Private(restrictedaccess)
+6. SelectAddaREADMEfile(recommended).
+7. ClickCreateRepository.
+ 
+4. StepstoCreateaBranch
+1. Openyourrepository.
+2. ClickontheBranchdropdown(usuallyshows“main”).
+3. Typeanewbranchname(e.g.,feature-update).
+4. ClickCreatebranch.
+ 
+ 
+Isha Gupta
+J240213055
+B.TechIT(G2)
+ 
+JCS408– LabFile
+ 
+5. StepstoMakeChangesinaBranch
+1. Switchtothenewlycreatedbranch.
+2. Editoruploadfiles.
+3. Addacommitmessagedescribingthechanges.
+4. ClickCommitchanges.
+ 
+6. StepstoMergeBranchintoMain
+1. Gototherepositoryhomepage.
+2. ClickonCompare&PullRequest.
+3. Addadescriptionofchanges.
+4. ClickCreatePullRequest.
+5. ClickMergePullRequest.
+6. Confirmmerge.
+StepstoHostaStaticWebsiteusingGitHubPages
+1. Openyourrepository.
+2. GotoSettingstab.
+3. ScrolltoPages(underCodeandAutomationsection).
+4. UnderSource,select:
+o Branch: main
+ 
+Isha Gupta
+J240213055
+B.TechIT(G2)
+ 
+JCS408– LabFile
+ 
+o Folder: /root
+5. ClickSave.
+6. GitHub will generate a live website link like: https://username.github.io/repository-name/
+7. Openthelinkinyourbrowsertoviewyourhostedwebsite.
