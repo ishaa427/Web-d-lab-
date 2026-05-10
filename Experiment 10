@@ -1,0 +1,93 @@
+Program 10
+Aim: Deploy a static website on Netlify and a dynamic website on Heroku or AWS.
+PART A: Deployment using Netify:
+Index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>My Static Website</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h1>Welcome to My Static Website</h1>
+<p>This site is deployed on Netlify </p>
+<button onclick="showMessage()">Click Me</button>
+<script src="script.js"></script>
+</body>
+</html>
+style.css
+body {
+font-family: Arial, sans-serif;
+text-align: center;
+background-color: #f4f4f4;
+}
+h1 {
+}
+color: #333;
+Script.js
+function showMessage() {
+alert("Hello! Your static site is working ");
+}
+Deployment Steps (Netlify):
+1. Go to https://www.netlify.com
+2. Sign up / Login
+3. Click “Add new site” → Deploy manually
+4. Drag & drop your static-site folder
+5. Netlify will generate a live URL instantly
+6. Your static site is now live
+Hardik Gupta J240213039 IT(G2)
+Isha Gupta J240213055 IT(G2)
+PART B: Dynamic Website Deployment on Heroku:
+Server.js
+const express = require("express");
+const app = express();
+const PORT = process.env.PORT || 3000;
+// Serve static files
+app.use(express.static("public"));
+// API route
+app.get("/api/message", (req, res) => {
+res.json({ message: "Hello from backend 🎯 " });
+});
+app.listen(PORT, () => {
+console.log(`Server running on port ${PORT}`);
+});
+Hardik Gupta J240213039 IT(G2)
+Isha Gupta J240213055 IT(G2)
+Package.json
+{
+"name": "dynamic-site",
+"version": "1.0.0",
+"description": "Dynamic website using Node.js",
+"main": "server.js",
+"scripts": {
+"start": "node server.js"
+},
+"dependencies": {
+"express": "^4.18.2"
+}
+}
+Index.html
+<!DOCTYPE html>
+<html>
+<head>
+<title>Dynamic Website</title>
+</head>
+<body>
+<h1>Dynamic Website (Heroku)</h1>
+<button onclick="getData()">Fetch Data</button>
+<p id="output"></p>
+<script>
+function getData() {
+fetch('/api/message')
+Hardik Gupta J240213039 IT(G2)
+Isha Gupta J240213055 IT(G2)
+.then(res => res.json())
+.then(data => {
+document.getElementById("output").innerText = data.message;
+});
+}
+</script>
+</body>
+</html>
+Hardik Gupta 
