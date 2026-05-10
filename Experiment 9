@@ -1,0 +1,197 @@
+Experiment 9:
+Implement user authentication in a web app using Node.js, Express.js,
+MongoDB, and JWT for secure login/logout functionality.
+Aim
+To implement
+user authentication in a web application using Node.js, Express.js,
+MongoDB,and JWT for secure registration, login, protected routes, and logout
+functionality.
+Objective
+The objective of this experiment is:
+•
+to understand authentication in web applications,
+•
+to use Express for routing and middleware,
+• to store user data in MongoDB,
+• to generate and verify JWT tokens,
+•
+•
+to secure protected routes,
+and to implement login and logout flow.
+Express is a minimal Node.js framework commonly used for APIs and web apps. Mongoose
+provides a schema-based way to model MongoDB data. JWT is a standard for representing
+claims securely between parties.
+Theory
+What is Authentication?
+Authentication
+is the process of verifying the identity of a user.
+When a user logs in with valid credentials, the server confirms who the user is.
+What is Authorization?
+Authorization
+decides what an authenticated user is allowed to access.
+For example, only logged-in users should be allowed to view protected pages.
+What is JWT?
+JWT (JSONWebToken)
+is a compact token format used to securely transmit information between parties. After
+successful login, the server can issue a signed token, and later verify that token on protected
+requests.
+Why use MongoDB?
+MongoDB is used to store user details such as:
+•
+username
+•
+email
+•
+hashed password
+MongoDB can be accessed from Node.js directly with the official driver, and Mongoose is a
+popular ODM layer on top of MongoDB for schemas and models.
+Logout with JWT
+JWT is usually stateless. So, logout commonly means:
+•
+removing the token from the client side, or
+•
+maintaining a token blacklist in advanced systems
+For a simple lab experiment, clearing the stored token on the client side is enough.
+Requirements
+• Node.js installed
+• MongoDB installed locally or MongoDB Atlas account
+•
+VS Code or any code editor
+•
+Postman or Thunder Client
+•
+Basic knowledge of JavaScript and Express
+MongoDB can be connected using a connection string, and Mongoose recommends
+mongoose.connect() for opening a connection. For local MongoDB with modern Node.js,
+Mongoose recommends using 127.0.0.1 instead of localhost in some cases.
+Procedure
+Step 1: Create project folder
+Create a folder named auth-app.
+Step 2: Initialize project
+•
+•
+•
+•
+npm init -y
+npm install express
+npm install mongoose
+npm install jsonwebtoken
+Create main server file
+Create a file named server.js
+. Step 3: Connect to MongoDB
+Use mongoose.connect() with your MongoDB URI.
+Step 4: Create User schema
+Define fields like:
+•
+Email
+•
+password
+Step 5: Implement register route
+•
+accept user details
+•
+hash password
+•
+save user in MongoDB
+Step 6: Implement login route
+•
+check email
+•
+compare password with hashed password
+•
+generate JWT token
+Step 7: Implement auth middleware
+•
+read token from request header
+•
+verify token
+•
+allow access only if token is valid
+Express route methods and middleware are the standard way to structure this flow.
+Step 8: Implement protected route
+Create a route that only logged-in users can access.
+Step 9: Logout
+For simple JWT logout:
+• remove token from frontend local storage or session storage
+Code:
+const express = require("express");
+const mongoose = require("mongoose");
+const jwt = require("jsonwebtoken");
+const app = express();
+app.use(express.json());
+const JWT
+_
+SECRET = "mysecretkey";
+// MongoDB connect
+mongoose.connect("mongodb://127.0.0.1:27017/auth
+_
+.then(() => console.log("MongoDB connected"))
+.catch(err => console.log(err));
+// User schema
+const userSchema = new mongoose.Schema({
+email: String,
+password: String
+});
+const User = mongoose.model("User"
+, userSchema);
+// REGISTER
+app.post("/register"
+, async (req, res) => {
+const { email, password } = req.body;
+const existingUser = await User.findOne({ email });
+if (existingUser) {
+return res.json({ msg: "User already exists" });
+demo")
+}
+const user = new User({ email, password });
+await user.save();
+res.json({ msg: "Registered" });
+});
+// LOGIN → generate JWT
+app.post("/login"
+, async (req, res) => {
+const { email, password } = req.body;
+const user = await User.findOne({ email, password });
+if (!user) {
+return res.json({ msg: "Invalid credentials" });
+}
+const token = jwt.sign(
+{ id: user.
+_
+id },
+JWT
+SECRET,
+_
+{ expiresIn: "1h" }
+);
+res.json({ token });
+});
+// JWT MIDDLEWARE
+function auth(req, res, next) {
+const header = req.headers["authorization"];
+if (!header) return res.json({ msg: "No token" });
+const token = header.split(" ")[1];
+try {
+const decoded = jwt.verify(token, JWT
+_
+SECRET);
+req.user = decoded;
+next();
+} catch {
+res.json({ msg: "Invalid token" });
+}
+}
+// PROTECTED ROUTE
+app.get("/profile"
+, auth, async (req, res) => {
+const user = await User.findById(req.user.id);
+res.json({ email: user.email });
+});
+// LOGOUT
+app.post("/logout"
+, (req, res) => {
+res.json({ msg: "Logout: just delete token on client" });
+});
+// Start server
+app.listen(5000, () => console.log("Server running"));
+OUTPUT
