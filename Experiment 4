@@ -1,0 +1,98 @@
+Experiment 4
+ 
+Aim:Optimize a given webpage for SEO and accessibility by implementing semantic HTML, proper heading structure, and meta tags.
+ 
+Search Engine Optimization (SEO) helps improve the visibility of a website on search engines. Accessibility ensures that web content is usable by everyone, including people with disabilities. Using semantic HTML, proper heading structure, and meta tags improves both SEO and accessibility.
+ 
+Optimized HTML Structure
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- SEO Meta Tags -->
+<meta name="description" content="Personal portfolio website showcasing projects, skills, and contact details.">
+<meta name="keywords" content="portfolio, web developer, projects, HTML, CSS">
+<meta name="author" content="Isha Gupta">
+
+<title>SEO Optimized Webpage</title>
+</head>
+
+<body>
+
+<!-- Header Section -->
+<header>
+<nav aria-label="Main Navigation">
+<h1>My Portfolio</h1>
+<ul>
+<li><a href="#home">Home</a></li>
+<li><a href="#about">About</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+</nav>
+</header>
+
+<!-- Main Content -->
+<main>
+
+<!-- Home Section -->
+<section id="home">
+<h2>Welcome</h2>
+<p>This is an SEO optimized and accessible webpage.</p>
+</section>
+
+<!-- About Section -->
+<section id="about">
+<h2>About Me</h2>
+<p>I am a web developer passionate about creating accessible and optimized websites.</p>
+</section>
+
+<!-- Image with Alt Text -->
+<section>
+<h2>My Work</h2>
+<imgsrc="project.jpg" alt="Screenshot of my web development project">
+</section>
+
+</main>
+
+<!-- Footer Section -->
+<footer>
+<h3>Contact</h3>
+<p>Email: example@gmail.com</p>
+</footer>
+
+</body>
+</html>
+ 
+Key SEO and Accessibility Techniques
+1. Semantic HTML Tags
+Tags Used:<header>, <nav>, <main>, <section>, <footer>
+Use: Improves readability for search engines and screen readers.
+ 
+2. Proper Heading Structure
+Example:
+<h1>Main Title</h1>
+<h2>Section Title</h2>
+<h3>Subsection</h3>
+Use: Maintains logical content hierarchy for SEO and accessibility.
+ 
+3. Meta Tags
+Example:
+<meta name="description" content="...">
+<meta name="keywords" content="...">
+Use: Helps search engines understand webpage content.
+ 
+4. Alt Attributes for Images
+Example:
+<imgsrc="image.jpg" alt="Description of image">
+Use: Helps visually impaired users and improves SEO.
+ 
+5. ARIA Attributes
+Example:
+<nav aria-label="Main Navigation">
+Use: Improves accessibility for screen readers.
+ 
+Conclusion
+Implementing semantic HTML, proper heading structure, and SEO meta tags enhances both search engine visibility and user accessibility. These practices are essential for building modern, user-friendly websites.
+
